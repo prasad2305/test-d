@@ -1,4 +1,4 @@
-name: Hello World Workflow
+name: Secret & Var Demo
 
 on:
   push:
@@ -6,11 +6,34 @@ on:
       - main
 
 jobs:
-  say-hello:
+  show-secrets-vars:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Say Hello
-        run: echo "Hello World"
+      - name: Access Secret and Variable
+        run: |
+          echo "Value of MY_VAR: $MY_VAR"
+          echo "Value of MY_SECRET: $MY_SECRET"
+        env:
+          MY_VAR: ${{ vars.MY_VAR }}
+          MY_SECRET: ${{ secrets.MY_SECRET }}
+
+
+# name: Hello World Workflow
+
+# on:
+#   push:
+#     branches:
+#       - main
+
+# jobs:
+#   say-hello:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3
+
+#       - name: Say Hello
+#         run: echo "Hello World"
